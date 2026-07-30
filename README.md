@@ -30,9 +30,20 @@ npm install              # one-time, ~30s
 npm run build            # outputs to ./dist/
 npm run preview          # serves dist/ on http://localhost:4321 (or next free port)
 npm run dev              # dev server with HMR on http://localhost:4321
+npm run astro -- check   # type-check all .astro + .ts files (requires dev deps)
 ```
 
-> 💡 **Termux note**: `npm run` works here because scripts call `node ./node_modules/astro/bin/astro.mjs` directly. On standard Linux/macOS you can simplify to `"build": "astro build"` — the symlinks in `node_modules/.bin/` resolve correctly there.
+> 💡 **Termux / Linux note 1**: `npm run` works here because scripts call `node ./node_modules/astro/bin/astro.mjs` directly. On standard Linux/macOS you can simplify to `"build": "astro build"` — the symlinks in `node_modules/.bin/` resolve correctly there.
+>
+> 💡 **Note 2**: `@astrojs/tailwind@6.0.2` declares peer-dep on Astro 3-5 but Astro 7 handles Tailwind v4 internally. The build works. If you re-install with `npm ci` and it fails on peer-dep mismatch, use `npm install --legacy-peer-deps`.
+
+## Verification status
+
+| Check | Command | Status |
+|---|---|---|
+| Build | `npm run build` | ✅ 4 pages, EXIT=0, ~1.3s |
+| Type safety | `npm run astro -- check` | ✅ 0 errors, 18 files |
+| Smoke (live) | `curl http://localhost:4323/` | ✅ HTTP 200, 56KB |
 
 ## Project structure
 
