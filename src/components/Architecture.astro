@@ -1,0 +1,86 @@
+---
+const layers = [
+  {
+    title: 'Surfaces',
+    items: ['CLI', 'Ink TUI', 'Electron Desktop', 'Web Dashboard', 'ACP for IDEs', 'OpenAI-compatible proxy'],
+    color: 'accent',
+  },
+  {
+    title: 'Gateway',
+    items: ['Telegram', 'Discord', 'Slack', 'WhatsApp', 'Signal', 'Email', 'SMS', 'WeChat'],
+    color: 'emerald',
+  },
+  {
+    title: 'Agent Loop',
+    items: ['Tool calls', 'Skill auto-load', 'Memory recall', 'Delegation', 'Cron ticks', 'Compression'],
+    color: 'sky',
+  },
+  {
+    title: 'Toolsets',
+    items: ['web', 'browser', 'terminal', 'file', 'code_exec', 'image_gen', 'tts', 'memory', '+20 more'],
+    color: 'amber',
+  },
+  {
+    title: 'Tool Gateway',
+    items: ['Web (Firecrawl)', 'Image (FAL)', 'TTS (OpenAI)', 'STT (Whisper)', 'Browser (cloud)', 'Modal sandboxes'],
+    color: 'rose',
+  },
+];
+---
+
+<section id="architecture" class="relative py-24 md:py-32 border-t border-white/[0.06] overflow-hidden">
+  <div class="absolute inset-0 -z-10 grid-bg opacity-40"></div>
+
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <p class="eyebrow mb-4">Anatomy</p>
+      <h2 class="heading-display text-4xl md:text-5xl tracking-tight">
+        One agent core. Many ways to talk to it.
+      </h2>
+      <p class="mt-5 text-ink-300 text-lg leading-relaxed">
+        Hermes is a layered runtime. The agent loop is the same regardless of
+        whether you call it from your terminal, Telegram, or an IDE bridge.
+      </p>
+    </div>
+
+    <div class="grid gap-3 max-w-3xl mx-auto">
+      {layers.map((layer, i) => (
+        <div class="group relative">
+          <div class="grid grid-cols-12 items-center gap-4 rounded-2xl border border-white/[0.08] bg-gradient-to-r from-white/[0.04] via-white/[0.02] to-transparent p-5 transition-colors hover:border-white/[0.18]">
+            <div class="col-span-12 md:col-span-3">
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-[11px] text-ink-500">L{i}</span>
+                <h3 class="text-sm font-semibold text-white">{layer.title}</h3>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-9 flex flex-wrap gap-1.5">
+              {layer.items.map((item) => (
+                <span class="rounded-md bg-white/[0.04] px-2 py-1 text-[11px] font-mono text-ink-200 ring-1 ring-inset ring-white/[0.06]">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+      <div class="card text-center">
+        <div class="text-3xl font-display text-white">5min</div>
+        <div class="mt-1 text-xs uppercase tracking-wider text-ink-400">Setup time</div>
+        <p class="mt-3 text-sm text-ink-300">curl install → model pick → done</p>
+      </div>
+      <div class="card text-center">
+        <div class="text-3xl font-display text-white">1</div>
+        <div class="mt-1 text-xs uppercase tracking-wider text-ink-400">Subscription</div>
+        <p class="mt-3 text-sm text-ink-300">Web, image, TTS, browser via Portal</p>
+      </div>
+      <div class="card text-center">
+        <div class="text-3xl font-display text-white">∞</div>
+        <div class="mt-1 text-xs uppercase tracking-wider text-ink-400">Surfaces</div>
+        <p class="mt-3 text-sm text-ink-300">Run it anywhere your shell exists</p>
+      </div>
+    </div>
+  </div>
+</section>

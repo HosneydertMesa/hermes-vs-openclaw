@@ -1,0 +1,85 @@
+---
+const features = [
+  {
+    title: 'Multi-surface parity',
+    body: 'Same agent core drives CLI, Ink TUI, native Electron desktop app, web dashboard, OpenAI-compatible proxy, and ACP server for IDEs. Behavior stays consistent everywhere — no platform-specific scripts.',
+    icon: 'shapes',
+  },
+  {
+    title: 'Tool Gateway',
+    body: 'One Nous Portal subscription unlocks web search, image generation, TTS, STT, and browser automation across every surface — zero per-tool API keys to wrangle.',
+    icon: 'bolt',
+  },
+  {
+    title: 'Skill lifecycle',
+    body: 'Skills auto-load by trigger, get pinned/archived by the curator, and can be written by the agent itself via skill_manage. Every successful task becomes reusable procedure.',
+    icon: 'stack',
+  },
+  {
+    title: 'Cross-platform messaging',
+    body: 'The same Hermes that drives your terminal becomes your team channel on Telegram, Discord, Slack, WhatsApp, Signal, Email, SMS, and WeChat. The watchdog keeps the gateway alive.',
+    icon: 'chat',
+  },
+  {
+    title: 'MCP, done right',
+    body: 'Discovery-first install, OAuth browser-handoff for auth-required servers, tool-by-tool enablement. Catalog-pick from a curated list or wire any stdio/SHTTP endpoint.',
+    icon: 'plug',
+  },
+  {
+    title: 'Cron that survives',
+    body: 'Durable scheduled jobs, scripts-as-watchdogs (no_agent mode) for polling, 3-minute hard interrupt per run, .tick.lock prevents duplicate ticks. Cron sessions skip memory by default.',
+    icon: 'clock',
+  },
+  {
+    title: 'Memory that matters',
+    body: 'Persistent user/memory stores injected into every turn. Nudges at 10-turn intervals, flush after 6. Stops you from re-explaining your environment every session.',
+    icon: 'brain',
+  },
+  {
+    title: 'Kanban for teams',
+    body: 'Multi-profile board for distributed work. Dispatcher runs in the gateway, claims tasks atomically, spawns the right worker. Heartbeats keep tasks alive across crashes.',
+    icon: 'kanban',
+  },
+  {
+    title: 'Self-extension',
+    body: 'Skills, plugins, MCP servers, themes, desktop plugins, TUI widgets, pet mascots. Plugins install from Git URLs and update in place. Hermes is a platform you can build on.',
+    icon: 'spark',
+  },
+];
+
+const icons: Record<string, string> = {
+  shapes: '<path d="M12 2 2 7l10 5 10-5-10-5zm0 13L2 10v7l10 5 10-5v-7l-10 5z"/>',
+  bolt: '<path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51-.07.18-.05.11-.07.16C12.96 17.55 11 21 11 21z"/>',
+  stack: '<path d="M12 2 2 7l10 5 10-5-10-5zm-7 9.5L2 13l10 5 10-5-3-1.5v3L12 19l-7-3.5v-3z"/>',
+  chat: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  plug: '<path d="M9 11V7a3 3 0 1 1 6 0v4M5 11h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-8z"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  brain: '<path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 0 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 0 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/>',
+  kanban: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/>',
+  spark: '<path d="M12 2v6m0 8v6m10-10h-6M2 12h6m8.5-7.5-4 4m-3 7-4 4m0-11 4 4m7 3 4 4"/>',
+};
+---
+
+<section id="features" class="relative py-24 md:py-32 border-t border-white/[0.06]">
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <p class="eyebrow mb-4">Why Hermes</p>
+      <h2 class="heading-display text-4xl md:text-5xl tracking-tight">
+        Nine capabilities you can't
+        <span class="italic text-accent-300">cheaply</span> reproduce elsewhere.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {features.map((f) => (
+        <article class="card-feature group">
+          <div class="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500/10 ring-1 ring-inset ring-accent-500/20 transition-colors group-hover:bg-accent-500/20">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-accent-300" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" set:html={icons[f.icon]} />
+          </div>
+          <h3 class="text-lg font-medium text-white">{f.title}</h3>
+          <p class="mt-2 text-sm text-ink-300 leading-relaxed">{f.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+{
+  "name": "hermes-vs-openclaw",
+  "version": "1.0.0",
+  "description": "Comparative showcase of Hermes Agent vs OpenClaw — built with Astro on Termux/Android",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.1.6",
+    "@astrojs/tailwind": "^6.0.2",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,100 @@
+---
+const plans = [
+  {
+    name: 'Free',
+    price: '$0',
+    cadence: 'forever',
+    highlight: false,
+    features: [
+      'Hermes CLI + TUI',
+      '1 active profile',
+      'Local-only tools (terminal, file, code_exec)',
+      'Memory across sessions',
+      'Bring your own API keys',
+    ],
+    cta: 'curl install',
+    href: 'https://hermes-agent.nousresearch.com/docs',
+  },
+  {
+    name: 'Portal',
+    price: '$20',
+    cadence: '/ month',
+    highlight: true,
+    badge: 'Recommended',
+    features: [
+      'Everything in Free',
+      '300+ models via Nous Portal',
+      'Tool Gateway: web · image · TTS · STT · browser',
+      'Multi-surface (Desktop, Dashboard, Messaging)',
+      'Priority support',
+    ],
+    cta: 'Start free trial',
+    href: 'https://portal.nousresearch.com/manage-subscription',
+  },
+  {
+    name: 'Team',
+    price: 'Custom',
+    cadence: 'on request',
+    highlight: false,
+    features: [
+      'Everything in Portal',
+      'Kanban with multi-worker dispatch',
+      'Profile isolation + per-profile OAuth',
+      'SSO + audit log',
+      'Dedicated success engineer',
+    ],
+    cta: 'Contact us',
+    href: 'mailto:team@nousresearch.com',
+  },
+];
+---
+
+<section id="pricing" class="relative py-24 md:py-32 border-t border-white/[0.06]">
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <p class="eyebrow mb-4">Pricing</p>
+      <h2 class="heading-display text-4xl md:text-5xl tracking-tight">
+        Open source. Pricing scales with usage, not seats.
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+      {plans.map((plan) => (
+        <div class={`relative rounded-3xl border p-7 ${plan.highlight ? 'border-accent-500/40 bg-gradient-to-b from-accent-500/10 via-accent-500/[0.04] to-transparent shadow-glow-accent' : 'border-white/[0.08] bg-white/[0.02]'}`}>
+          {plan.badge && (
+            <span class="absolute -top-3 left-7 rounded-full bg-accent-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
+              {plan.badge}
+            </span>
+          )}
+          <h3 class="text-lg font-medium text-white">{plan.name}</h3>
+          <div class="mt-4 flex items-baseline gap-1.5">
+            <span class="text-4xl font-display tracking-tight text-white">{plan.price}</span>
+            <span class="text-sm text-ink-400">{plan.cadence}</span>
+          </div>
+          <ul class="mt-6 space-y-3 text-sm text-ink-300">
+            {plan.features.map((f) => (
+              <li class="flex items-start gap-2.5">
+                <svg viewBox="0 0 24 24" class="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={plan.href}
+            target="_blank"
+            rel="noopener"
+            class={`mt-7 block w-full text-center rounded-full px-5 py-2.5 text-sm font-medium transition ${plan.highlight ? 'bg-white text-ink-1000 hover:bg-ink-100' : 'border border-white/[0.12] bg-white/[0.02] text-white hover:bg-white/[0.06]'}`}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-10 text-center text-xs text-ink-500">
+      Open source under MIT · self-host for free · cancel any time
+    </p>
+  </div>
+</section>

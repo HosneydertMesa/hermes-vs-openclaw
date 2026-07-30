@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Hermes on a $200 Android tablet — Field report" description="Five days running Hermes Agent on a Cortex-A55 tablet with Termux. Setup, surprises, and the actual screen sizes.">
+  <Header />
+  <main class="pt-32 pb-24">
+    <article class="container-narrow">
+      <div class="mb-8 flex items-center gap-3 text-xs">
+        <a href="/blog" class="text-ink-400 hover:text-white transition-colors">← Back to all posts</a>
+      </div>
+
+      <header class="mb-12">
+        <div class="flex items-center gap-3 text-[11px] font-mono text-ink-400 mb-4">
+          <span class="rounded-md bg-white/[0.05] px-2 py-0.5 ring-1 ring-inset ring-white/[0.06]">Field report</span>
+          <span>2026-07-30 · 7 min read</span>
+        </div>
+        <h1 class="heading-display text-4xl md:text-5xl tracking-tight text-balance">
+          Hermes on a $200 Android tablet: a five-day field report.
+        </h1>
+        <p class="mt-5 text-lg text-ink-300 text-pretty leading-relaxed">
+          I wanted to know if Hermes Agent could realistically replace my laptop for
+          always-on assistant work. So I wiped an old tablet, installed Termux, and
+          lived with it for five days.
+        </p>
+      </header>
+
+      <div class="prose prose-invert prose-headings:font-display prose-headings:tracking-tight max-w-none">
+        <p class="text-ink-200 leading-relaxed">
+          The setup is the easy part. <code class="font-mono text-accent-300">pkg install curl</code>, the install script,
+          five minutes of choosing a model, done. The interesting parts start
+          the moment you try to make the agent survive a screen lock.
+        </p>
+
+        <h2 class="text-2xl mt-12 mb-4 text-white">What worked first try</h2>
+        <ul class="space-y-3 text-ink-200">
+          <li><strong class="text-white">Telegram gateway</strong> — the watchdog pattern (a tiny tmux-wrapped process that respawns the gateway on crash) means the bot survives Termux being suspended by Android.</li>
+          <li><strong class="text-white">Memory across sessions</strong> — I asked the agent to remember my project setup on day one and on day five it could still recite the folder layout.</li>
+          <li><strong class="text-white">GitHub CLI</strong> — sign-in via a Personal Access Token (not the interactive browser flow) is rock-solid.</li>
+        </ul>
+
+        <h2 class="text-2xl mt-12 mb-4 text-white">What surprised me</h2>
+        <p class="text-ink-200 leading-relaxed">
+          The Termux auto-menu guard in <code class="font-mono text-accent-300">~/.bashrc</code> intercepted every Hermes tool call
+          that didn't pre-set an env var. Fixed with a one-line guard addition:
+          <code class="font-mono text-accent-300">[ -n "$HERMES_SESSION_ID" ] && export HERMES_TERM=1</code>. After that,
+          my shell sessions stopped launching an interactive menu in the middle of
+          every Playwright install.
+        </p>
+
+        <h2 class="text-2xl mt-12 mb-4 text-white">What didn't work, and why</h2>
+        <p class="text-ink-200 leading-relaxed">
+          Browser automation. Local Chromium cannot launch on a Cortex-A55: the
+          CPU lacks the ARMv8.2-A instructions (<code class="font-mono text-accent-300">frintts</code>,
+          <code class="font-mono text-accent-300">sha3</code>, <code class="font-mono text-accent-300">dotprod</code>) that Chromium 2024+ ships
+          compiled against. Even after extracting <code class="font-mono text-accent-300">libchrome.so</code> from
+          com.google.android.webview and pointing Playwright at it, the process
+          dies with <code class="font-mono text-accent-300">SIGILL</code> within 200 ms.
+        </p>
+        <p class="text-ink-200 leading-relaxed mt-4">
+          The realistic path is a cloud browser — Browserbase MCP at
+          <code class="font-mono text-accent-300">https://mcp.browserbase.com/mcp</code>. Hermes wires it as a regular
+          MCP server; the actual Chromium runs on Browserbase's cloud, the agent
+          gets typed tool calls, no SIGILL anywhere.
+        </p>
+
+        <h2 class="text-2xl mt-12 mb-4 text-white">Verdict</h2>
+        <p class="text-ink-200 leading-relaxed">
+          Five days in, the tablet runs my Telegram bot, my GitHub reads, and a
+          cron job that scrapes arXiv for me every morning. The browser gap is
+          real but isolated. Hermes on a tablet is no longer a stunt — it's a
+          viable second runtime.
+        </p>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-white/[0.08] flex items-center justify-between text-sm">
+        <a href="/blog" class="text-ink-400 hover:text-white transition-colors">← All field notes</a>
+        <a href="/" class="text-accent-300 hover:text-accent-200 transition-colors">Compare Hermes vs OpenClaw →</a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

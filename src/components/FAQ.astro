@@ -1,0 +1,55 @@
+---
+const faqs = [
+  {
+    q: 'Is Hermes really free?',
+    a: 'Yes. The runtime is MIT-licensed and free forever. You only pay if you subscribe to Nous Portal for managed inference and Tool Gateway access — and even then, the Free tier of Portal gets you started with managed inference and partial tool coverage.',
+  },
+  {
+    q: 'How does Hermes compare to Claude Code or Codex CLI?',
+    a: 'Hermes is the meta-platform that hosts those and many more. It supports Claude, GPT, Gemini, DeepSeek, local models, and 20+ providers via OpenAI-compatible endpoints. Same agent loop, swap models mid-workflow.',
+  },
+  {
+    q: 'Can I run Hermes on a Raspberry Pi? Old laptop? Android tablet?',
+    a: 'Yes. Hermes runs anywhere Python 3.10+ runs. Tested on Android (Termux), Raspberry Pi 4, Chromebook Linux container, AWS Lambda, old MacBooks, and your daily-driver Linux box. Termux quirks are documented.',
+  },
+  {
+    q: 'Will OpenClaw and Hermes merge?',
+    a: "They're sibling projects in the same ecosystem. OpenClaw has a `migrate-hermes` plugin to onboard from Hermes. Both ship as standalone runtimes; pick whichever fits your workflow and switch later.",
+  },
+  {
+    q: "What's the Tool Gateway and why should I care?",
+    a: 'A Tool Gateway is one subscription that covers web search, image generation, TTS, STT, and browser automation across every Hermes surface. No API key wrangling, no per-tool billing math. One bill, every tool.',
+  },
+  {
+    q: 'Is my data private?',
+    a: 'Tool Gateway requests are routed through Nous infrastructure and billed per-request. Memory and skills stay on your machine by default. You can audit every request in the gateway log. No telemetry sent from Hermes itself.',
+  },
+];
+---
+
+<section id="faq" class="relative py-24 md:py-32 border-t border-white/[0.06]">
+  <div class="container-narrow">
+    <div class="text-center mb-16">
+      <p class="eyebrow mb-4">FAQ</p>
+      <h2 class="heading-display text-4xl md:text-5xl tracking-tight">
+        Quick answers.
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      {faqs.map((f, i) => (
+        <details class="group rounded-2xl border border-white/[0.08] bg-white/[0.02] open:bg-white/[0.04] open:border-white/[0.14] transition-all">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left">
+            <span class="text-base font-medium text-white">{f.q}</span>
+            <svg viewBox="0 0 24 24" class="h-4 w-4 text-ink-400 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M12 5v14m-7-7h14"/>
+            </svg>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-ink-300 leading-relaxed">
+            {f.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

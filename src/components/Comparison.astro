@@ -1,0 +1,111 @@
+---
+const rows = [
+  {
+    capability: 'Surfaces (CLI, GUI, chat platforms)',
+    hermes: { status: 'positive', detail: 'CLI · TUI · Desktop (Electron) · Web Dashboard · Telegram · Discord · Slack · WhatsApp · Signal · Email · SMS · 10+ platforms' },
+    openclaw: { status: 'partial', detail: 'CLI · ACP bridge (Claude Code attach) · Telegram bridge' },
+  },
+  {
+    capability: 'Toolset breadth',
+    hermes: { status: 'positive', detail: '30+ built-in toolsets, MCP with selective enable, self-registering extensions' },
+    openclaw: { status: 'positive', detail: '50+ extensions (richer catalog), each with its own plugin contract' },
+  },
+  {
+    capability: 'Memory + learning',
+    hermes: { status: 'positive', detail: 'Persistent memory across sessions · skill auto-creation from successful runs · curator lifecycle (pin/archive/prune)' },
+    openclaw: { status: 'partial', detail: 'memory-core + memory-wiki plugins · kanban work queue · less automated' },
+  },
+  {
+    capability: 'Multi-agent orchestration',
+    hermes: { status: 'positive', detail: 'delegate_task with roles (leaf/orchestrator), nested spawn depth, parallel batches' },
+    openclaw: { status: 'positive', detail: 'agents command, isolated workspaces + auth, routing matrix' },
+  },
+  {
+    capability: 'Scheduled work (cron)',
+    hermes: { status: 'positive', detail: 'cronjob tool, durable scheduler, scripts-as-watchdogs (no_agent mode), fan-out delivery' },
+    openclaw: { status: 'partial', detail: 'Available via plugins, less first-class' },
+  },
+  {
+    capability: 'Tool Gateway (web, image, TTS, browser)',
+    hermes: { status: 'positive', detail: 'First-class via Nous Portal sub · managed billing · zero API keys' },
+    openclaw: { status: 'partial', detail: 'Each tool has its own plugin (fal, elevenlabs, etc.) — you wire the keys' },
+  },
+  {
+    capability: 'Self-extension via skills',
+    hermes: { status: 'positive', detail: 'Skills system with discovery, auto-loading, version control. `skill_manage` tool lets the agent write its own skills.' },
+    openclaw: { status: 'positive', detail: 'Plugin system with contracts (tools, webSearchProviders, etc.) — code-first extension model' },
+  },
+  {
+    capability: 'Web dashboard / admin UI',
+    hermes: { status: 'positive', detail: '`hermes dashboard` — admin panel, channels, MCP catalog, webhooks, profile builder, embedded chat' },
+    openclaw: { status: 'partial', detail: 'No native equivalent' },
+  },
+  {
+    capability: 'Mobile / Termux experience',
+    hermes: { status: 'positive', detail: 'First-class Termux support · documented workarounds · wake-lock aware gateway · tablet-tested' },
+    openclaw: { status: 'positive', detail: 'Native Termux build (openclaw-android) · glibc compatibility baked in' },
+  },
+  {
+    capability: 'Configuration surface',
+    hermes: { status: 'partial', detail: 'config.yaml + .env + profiles; powerful but dense' },
+    openclaw: { status: 'positive', detail: 'Per-profile state dir + profiles flag · strong isolation · `migrate-hermes` to onboard from Hermes' },
+  },
+];
+---
+
+<section id="comparison" class="relative py-24 md:py-32 border-t border-white/[0.06]">
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <p class="eyebrow mb-4">Side by side</p>
+      <h2 class="heading-display text-4xl md:text-5xl tracking-tight">
+        Where they diverge.
+      </h2>
+      <p class="mt-5 text-ink-300 text-lg leading-relaxed">
+        Both agents aim to be the runtime for AI work that lives on your box. Hermes
+        bets on breadth and surface parity; OpenClaw bets on plugin composability.
+      </p>
+    </div>
+
+    <div class="overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.01] backdrop-blur">
+      <div class="grid grid-cols-12 border-b border-white/[0.08] bg-white/[0.03] px-6 py-4">
+        <div class="col-span-12 md:col-span-5 text-xs font-medium uppercase tracking-wider text-ink-400">Capability</div>
+        <div class="col-span-6 md:col-span-4 flex items-center gap-2 text-xs font-medium uppercase tracking-wider">
+          <span class="h-2 w-2 rounded-full bg-accent-400"></span>
+          <span class="text-white">Hermes Agent</span>
+        </div>
+        <div class="col-span-6 md:col-span-3 flex items-center gap-2 text-xs font-medium uppercase tracking-wider">
+          <span class="h-2 w-2 rounded-full bg-ink-400"></span>
+          <span class="text-ink-300">OpenClaw</span>
+        </div>
+      </div>
+
+      {rows.map((row, i) => (
+        <div class={`grid grid-cols-12 px-6 py-5 ${i !== rows.length - 1 ? 'border-b border-white/[0.06]' : ''}`}>
+          <div class="col-span-12 md:col-span-5 mb-3 md:mb-0">
+            <div class="text-sm font-medium text-white">{row.capability}</div>
+          </div>
+          <div class="col-span-6 md:col-span-4 pr-3">
+            <div class="flex items-start gap-2">
+              <span class={row.hermes.status === 'positive' ? 'badge-positive' : 'badge-soft'}>
+                {row.hermes.status === 'positive' ? '✓ full' : '◐ partial'}
+              </span>
+            </div>
+            <p class="mt-2 text-sm text-ink-300 leading-relaxed">{row.hermes.detail}</p>
+          </div>
+          <div class="col-span-6 md:col-span-3">
+            <div class="flex items-start gap-2">
+              <span class={row.openclaw.status === 'positive' ? 'badge-positive' : 'badge-soft'}>
+                {row.openclaw.status === 'positive' ? '✓ full' : '◐ partial'}
+              </span>
+            </div>
+            <p class="mt-2 text-sm text-ink-300 leading-relaxed">{row.openclaw.detail}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-8 text-center text-xs text-ink-500 max-w-2xl mx-auto">
+      Comparison current as of v3.1 (Hermes) / 2026.7.1 (OpenClaw). Sources: official docs, GitHub source, hands-on testing.
+    </p>
+  </div>
+</section>

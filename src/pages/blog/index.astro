@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = [
+  {
+    slug: 'termux-field-report',
+    title: 'Hermes on a $200 Android tablet: a five-day field report',
+    excerpt: 'Wake-lock, watchdog, Telegram bot, GitHub auth, and the lessons learned from running a full agent runtime on hardware that fits in a coat pocket.',
+    tag: 'Field report',
+    date: '2026-07-30',
+    readMin: 7,
+  },
+  {
+    slug: 'cortex-a55-chromium',
+    title: 'Why Cortex-A55 breaks modern Chromium (and what to do)',
+    excerpt: 'ARMv8-A vs ARMv8.2-A: why your CPU silently refuses to run modern Chrome, and the realistic paths to browser automation on legacy hardware.',
+    tag: 'Engineering',
+    date: '2026-07-29',
+    readMin: 9,
+  },
+  {
+    slug: 'tool-gateway-economics',
+    title: 'The Tool Gateway economics, explained',
+    excerpt: 'Why bundling web + image + TTS + browser under one Portal subscription beats stitching five separate API keys — even for power users.',
+    tag: 'Architecture',
+    date: '2026-07-25',
+    readMin: 6,
+  },
+  {
+    slug: 'mcp-as-universal-adapter',
+    title: 'MCP as a universal adapter — and what it costs you',
+    excerpt: 'The Model Context Protocol turns every tool into a typed function. Here is what that buys you, what it costs in latency, and when you should not bother.',
+    tag: 'Architecture',
+    date: '2026-07-18',
+    readMin: 8,
+  },
+];
+---
+
+<BaseLayout title="Field notes · Hermes-vs-OpenClaw" description="Hands-on reports from running Hermes Agent on real hardware.">
+  <Header />
+  <main class="pt-32 pb-24">
+    <div class="container-narrow">
+      <p class="eyebrow mb-4">Field notes</p>
+      <h1 class="heading-display text-5xl md:text-6xl tracking-tight mb-6">
+        Notes from the runtime.
+      </h1>
+      <p class="text-lg text-ink-300 text-pretty leading-relaxed max-w-2xl">
+        What we learned running Hermes Agent on weird hardware, against weird APIs, on weird schedules.
+      </p>
+
+      <div class="mt-16 space-y-3">
+        {posts.map((p) => (
+          <a href={`/blog/${p.slug}`} class="group flex items-start gap-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 transition-colors hover:border-white/[0.18] hover:bg-white/[0.04]">
+            <div class="hidden md:block w-32 flex-shrink-0 text-xs font-mono text-ink-500 pt-1">
+              {new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              <div class="mt-1 text-ink-600">{p.readMin} min</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="font-mono text-[11px] text-ink-400">{p.tag}</span>
+              </div>
+              <h2 class="text-xl font-medium text-white text-pretty leading-snug group-hover:text-accent-200 transition-colors">
+                {p.title}
+              </h2>
+              <p class="mt-2 text-sm text-ink-300 leading-relaxed">{p.excerpt}</p>
+            </div>
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-ink-500 group-hover:text-accent-300 transition-colors mt-2 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M5 12h14m-6-6 6 6-6 6"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
