@@ -37,7 +37,9 @@ const posts = [
     readMin: 8,
   },
 ];
+const base = import.meta.env.BASE_URL;
 ---
+
 
 <BaseLayout title="Field notes · Hermes-vs-OpenClaw" description="Hands-on reports from running Hermes Agent on real hardware.">
   <Header />
@@ -53,7 +55,7 @@ const posts = [
 
       <div class="mt-16 space-y-3">
         {posts.map((p) => (
-          <a href={`/blog/${p.slug}`} class="group flex items-start gap-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 transition-colors hover:border-white/[0.18] hover:bg-white/[0.04]">
+          <a href={`${base}/blog/${p.slug}`} class="group flex items-start gap-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 transition-colors hover:border-white/[0.18] hover:bg-white/[0.04]">
             <div class="hidden md:block w-32 flex-shrink-0 text-xs font-mono text-ink-500 pt-1">
               {new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
               <div class="mt-1 text-ink-600">{p.readMin} min</div>

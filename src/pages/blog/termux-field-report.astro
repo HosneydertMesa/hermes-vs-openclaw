@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Hermes on a $200 Android tablet — Field report" description="Five days running Hermes Agent on a Cortex-A55 tablet with Termux. Setup, surprises, and the actual screen sizes.">
@@ -9,7 +10,7 @@ import Footer from '../../components/Footer.astro';
   <main class="pt-32 pb-24">
     <article class="container-narrow">
       <div class="mb-8 flex items-center gap-3 text-xs">
-        <a href="/blog" class="text-ink-400 hover:text-white transition-colors">← Back to all posts</a>
+        <a href={`${base}/blog`} class="text-ink-400 hover:text-white transition-colors">← Back to all posts</a>
       </div>
 
       <header class="mb-12">
@@ -76,8 +77,8 @@ import Footer from '../../components/Footer.astro';
       </div>
 
       <div class="mt-16 pt-8 border-t border-white/[0.08] flex items-center justify-between text-sm">
-        <a href="/blog" class="text-ink-400 hover:text-white transition-colors">← All field notes</a>
-        <a href="/" class="text-accent-300 hover:text-accent-200 transition-colors">Compare Hermes vs OpenClaw →</a>
+        <a href={`${base}/blog`} class="text-ink-400 hover:text-white transition-colors">← All field notes</a>
+        <a href={`${base}`} class="text-accent-300 hover:text-accent-200 transition-colors">Compare Hermes vs OpenClaw →</a>
       </div>
     </article>
   </main>

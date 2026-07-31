@@ -3,7 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://hermes-vs-openclaw.pages.dev',
+  site: 'https://hosneydertmesa.github.io',
+  base: '/hermes-vs-openclaw',
   integrations: [
     tailwind({
       applyBaseStyles: false,

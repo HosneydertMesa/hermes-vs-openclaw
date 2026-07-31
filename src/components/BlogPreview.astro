@@ -25,6 +25,7 @@ const posts = [
     readMin: 6,
   },
 ];
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="blog" class="relative py-24 md:py-32 border-t border-white/[0.06]">
@@ -34,7 +35,7 @@ const posts = [
         <p class="eyebrow mb-3">From the blog</p>
         <h2 class="heading-display text-4xl md:text-5xl tracking-tight">Field notes</h2>
       </div>
-      <a href="/blog" class="btn-ghost text-xs">
+      <a href={`${base}/blog`} class="btn-ghost text-xs">
         All posts
         <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <path d="M5 12h14m-6-6 6 6-6 6"/>
@@ -44,7 +45,7 @@ const posts = [
 
     <div class="grid md:grid-cols-3 gap-5">
       {posts.map((p) => (
-        <a href={`/blog/${p.slug}`} class="card-feature group block">
+        <a href={`${base}/blog/${p.slug}`} class="card-feature group block">
           <div class="flex items-center justify-between text-[11px] font-mono text-ink-400 mb-4">
             <span class="rounded-md bg-white/[0.05] px-2 py-0.5 ring-1 ring-inset ring-white/[0.06]">{p.tag}</span>
             <span>{new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · {p.readMin} min</span>
